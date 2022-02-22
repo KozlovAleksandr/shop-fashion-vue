@@ -1,4 +1,4 @@
-# hello-vue
+# shop-vue
 
 ## Project setup
 ```
