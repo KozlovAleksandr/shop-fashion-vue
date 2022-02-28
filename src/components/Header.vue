@@ -56,7 +56,9 @@
           <router-link to="/cart"
             ><img src="../assets/header/cart.svg" alt="cart"
           /></router-link>
-          <div class="item__amount"></div>
+          <span class="item__amount" v-if="cartAmount">
+            {{ cartAmount }}
+          </span>
           <table class="cart_subtotal"></table>
         </nav>
       </div>
@@ -68,6 +70,11 @@
 export default {
   name: "Header",
   props: ["cart", "catalog"],
+  computed: {
+    cartAmount() {
+      return this.$store.getters.getCartCount;
+    },
+  },
 };
 </script>
 
@@ -116,15 +123,15 @@ export default {
 
     & .item__amount {
       position: absolute;
-      top: 0;
-      right: -10px;
-      height: 23px;
-      width: 23px;
+      top: -4px;
+      right: -5px;
+      height: 25px;
+      width: 25px;
       border-radius: 50%;
       background-color: #f16d7f;
       color: #fbfbfb;
-      font-size: 12px;
-      display: none;
+      font-size: 14px;
+      display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;

@@ -20,8 +20,9 @@
 
     <div class="cart-block__count">
       <div class="cart-block__count_top">
-        <p>Sub total <span>$900</span></p>
-        <p>Grad total <span class="decor">$900</span></p>
+        <p>
+          Grad total <span class="decor">$ {{ grandTotal }}</span>
+        </p>
       </div>
       <div class="cart-block__count_bottom">
         <button>Proceed to checkout</button>
@@ -35,6 +36,13 @@
 <script>
 export default {
   name: "CartFilling",
+  computed: {
+    grandTotal() {
+      return this.$store.getters.getGrandTotal
+        .toFixed(2)
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    },
+  },
 };
 </script>
 
@@ -92,20 +100,12 @@ export default {
       align-items: flex-end;
       text-transform: uppercase;
 
-      & p:first-child {
-        font-size: 11px;
-        line-height: 13px;
-        font-weight: 400;
-        color: #4a4a4a;
-        margin-top: 39px;
-      }
-
-      & p:last-child {
+      & p {
         font-size: 16px;
         line-height: 19px;
         font-weight: 300;
         color: #4a4a4a;
-        margin: 12px 0 23px;
+        margin: 39px 0 23px;
 
         & span {
           color: #f16d7f;
