@@ -4,7 +4,7 @@
       <details>
         <summary>
           <span id="details__title">Fitter</span>
-          <img src="img/header/01.svg" alt="" />
+          <img src="../assets/header/01.svg" alt="" />
           <!-- <div id="lodo">
                   <div></div>
                   <div></div>

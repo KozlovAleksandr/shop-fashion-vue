@@ -36,7 +36,11 @@ import CartFilling from "../components/CartFilling.vue";
 
 export default {
   name: "Cart",
-  props: ["cart", "catalog"],
+  computed: {
+    cart() {
+      return this.$store.getters.getCart;
+    },
+  },
 
   components: {
     ProductInCart,
@@ -44,15 +48,13 @@ export default {
     CartFilling,
   },
   methods: {
-    /**
-     * Генерирует событие покупки , на которое есть подписка в родительском компоненте
-     * так как только там хранятся объекты с товарами
-     */
     remove(id) {
-      this.$emit("removed", id);
+      this.$store.dispatch("removeFromCart", id);
     },
     clearCart() {
-      this.$emit("cleared");
+      this.cart.forEach((item) => {
+        this.$store.dispatch("removeFromCart", item.id);
+      });
     },
   },
 };

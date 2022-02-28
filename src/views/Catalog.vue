@@ -9,7 +9,7 @@
           v-bind:key="item.id"
           v-bind:data="item"
         >
-          <div class="products__item_button" v-on:click="() => buy(item.id)">
+          <div class="products__item_button" v-on:click="() => buy(item)">
             <span>
               <img
                 src="../assets/product_page/03.svg"
@@ -33,8 +33,11 @@ import CatalogPaginator from "../components/CatalogPaginator.vue";
 
 export default {
   name: "Catalog",
-  props: ["catalog", "cart"],
-
+  computed: {
+    catalog() {
+      return this.$store.getters.getCatalog;
+    },
+  },
   components: {
     ProductCard,
     PageHeader,
@@ -42,12 +45,8 @@ export default {
     CatalogPaginator,
   },
   methods: {
-    /**
-     * Генерирует событие покупки , на которое есть подписка в родительском компоненте
-     * так как только там хранятся объекты с товарами
-     */
-    buy(id) {
-      this.$emit("bought", id);
+    buy(item) {
+      this.$store.dispatch("addToCart", item);
     },
   },
 };

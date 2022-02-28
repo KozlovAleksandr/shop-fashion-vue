@@ -8,13 +8,13 @@
     <div class="cart-block__goods_info">
       <h2>{{ data.title }}</h2>
       <p>
-        Price: <span>${{ data.price }}</span>
+        Price: <span>$ {{ data.price }}</span>
       </p>
       <p>Color: {{ data.color }}</p>
       <p>Size: {{ data.size }}</p>
-      <p>
+      <p v-if="data.quantity">
         Quantity:
-        <input type="number" min="1" value="1" />
+        <input type="number" min="1" value="1" v-model="quantity" />
       </p>
 
       <slot></slot>
@@ -25,6 +25,20 @@
 <script>
 export default {
   name: "ProductInCart",
+
+  computed: {
+    quantity: {
+      get() {
+        return this.data.quantity;
+      },
+      set(value) {
+        this.$store.dispatch("setQuantity", {
+          id: this.data.id,
+          quantity: +value,
+        });
+      },
+    },
+  },
   props: ["data"],
 };
 </script>
